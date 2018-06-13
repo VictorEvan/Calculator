@@ -8,7 +8,7 @@ import Operators from './components/Operators';
 class App extends Component {
 
   state = {
-    formula: undefined,
+    formula: "",
     output: "0",
     currentOperator: undefined,
     numbers: {
@@ -65,7 +65,11 @@ class App extends Component {
         break;
       case "=":
         this.setState(state => {
-          if (state.formula.includes("=")) {
+          if (state.formula.includes("=") || 
+              state.formula.startsWith("/") || 
+              state.formula.startsWith("*") ||
+              state.formula.startsWith("-") 
+            ) {
             console.log("no changes made");
             return null;
           } else if (this.isOutputOperator()) {
@@ -86,12 +90,12 @@ class App extends Component {
         break;
       case "DEL":
         this.setState( state => {
-          if (state.output === "0" && state.formula === undefined) {
+          if (state.output === "0" && state.formula === "") {
             return null;
           } else {
             return {
               output: "0",
-              formula: undefined
+              formula: ""
             }
           }
         });
