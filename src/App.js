@@ -10,19 +10,7 @@ class App extends Component {
   state = {
     formula: "",
     output: "0",
-    currentOperator: undefined,
-    numbers: {
-      values: ["0","1","2","3","4","5","6","7","8","9"],
-      names: ["zero","one","two","three","four","five","six","seven","eight","nine"]
-    },
-    operators: {
-      values: ["DEL","/","X","-","+"],
-      names: ["clear","divide","multiply","subtract","add"]
-    },
-    kPOperators: {
-      values: [".", "="],
-      names: ["decimal","equals"]
-    }
+    currentOperator: undefined
   }
 
   isOutputOperator = () => {
@@ -151,18 +139,33 @@ class App extends Component {
         />
         <Keypad
           // properties
-          numbers={this.state.numbers}
-          kPOperators={this.state.kPOperators}
+          numbers={this.props.numbers}
+          kPOperators={this.props.kPOperators}
           // functions
           displayNumber={this.numberHandler}
           submitOperator={this.operatorHandler}
         />
         <Operators 
-          operators={this.state.operators}
+          operators={this.props.operators}
           submitOperator={this.operatorHandler}
         />
       </div>
     );
+  }
+}
+
+App.defaultProps = {
+  numbers: {
+    values: ["0","1","2","3","4","5","6","7","8","9"],
+    names: ["zero","one","two","three","four","five","six","seven","eight","nine"]
+  },
+  operators: {
+    values: ["DEL","/","X","-","+"],
+    names: ["clear","divide","multiply","subtract","add"]
+  },
+  kPOperators: {
+    values: [".", "="],
+    names: ["decimal","equals"]
   }
 }
 
